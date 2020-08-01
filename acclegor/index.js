@@ -1,8 +1,11 @@
 const http = require("http");
 
 const createAcclegorServer = () => {
-  const allCallbacks = {};
+  const reqResCallbacks = {};
   const fromattedURL = {};
+  /**
+   * for handling params like domain.com?name="hello"
+   */
   const getRequest = (path, params, url, hostName) => {
     const makeUrl = new URL(`http://${hostName}${url}`);
     const pathSplit = path.split("/:");
@@ -16,27 +19,31 @@ const createAcclegorServer = () => {
   };
 
   function getCall(path, callback) {
-    const pathSplit = path.split("/:");
+    const pathSplit = path.split("/:");  
     const paths = {};
-    for (let i = 1; i < pathSplit.length; i++) {
-      paths[pathSplit[i]] = "";
-    }
-    fromattedURL[pathSplit.length - 1] = paths;
-    allCallbacks[pathSplit.length - 1] = callback;
+
+    
+      for (let i = 1; i < pathSplit.length; i++) {
+        paths[pathSplit[i]] = "";
+      }
+      fromattedURL[pathSplit.length - 1] = paths;
+      reqResCallbacks[pathSplit.length - 1] = callback;
   }
   function listenServer(port) {
     http
       .createServer(function (req, res) {
         res.writeHead(200, { "Content-Type": "text/html" }); // http header
-
         var { url } = req;
-
         const splitURL = url.split("/");
 
         if (url === "/favicon.ico") {
           res.writeHead(200, { "Content-Type": "image/x-icon" });
           res.end(/* icon content here */);
-        } else {
+        }
+        else if(url === "/"){
+            reqResCallbacks[0](req, res);
+        }
+        else {
           for (let i = 1; i < splitURL.length; i++) {
             if (splitURL !== "favicon.ico") {
               let temp = fromattedURL[splitURL.length - 1];
@@ -45,7 +52,7 @@ const createAcclegorServer = () => {
           }
           req.params = {};
           req.params = fromattedURL[splitURL.length - 1];
-          allCallbacks[splitURL.length - 1](req, res);
+          reqResCallbacks[splitURL.length - 1](req, res);
         }
       })
       .listen(port, function () {
