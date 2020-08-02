@@ -4,11 +4,7 @@ const fs = require("fs");
 const createAcclegorServer = () => {
   const reqResCallbacks = {};
   const fromattedURL = {};
-  /**
-   * for handling params like domain.com?name="hello"
-   */
-
-
+ 
   function getCall(path, callback) {
     const pathSplit = path.split("/:");
     const paths = {};
@@ -20,6 +16,9 @@ const createAcclegorServer = () => {
     reqResCallbacks[pathSplit.length - 1] = callback;
   }
 
+   /**
+   * for handling params like domain.com?name="hello"
+   */
   const processedURL=(url)=>{
     const  newURL=new URL(`https://dummydomain.com${url}`);
     return{
