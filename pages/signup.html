@@ -3,21 +3,40 @@
 
 <head>
     <title>Login Page - Accelgor</title>
+    <style>
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-    <form action="/" method="post">
-        <label>First Name</label>
-        <input type="text" name="fname" /><br />
-        <label>Last Name</label>
-        <input type="text" name="lname" /><br />
-        <label>Email Address</label>
-        <input type="text" name="email" /><br />
-        <label>Password</label>
-        <input type="password" name="pwd" /><br />
-        <!-- <input type="file" name="photo" /><br /> -->
-        <button>Sign Up</button>
-    </form>
+    <div>
+        <form action="/" method="post">
+            <table>
+                <tr>
+                    <td><label>First Name:</label></td>
+                    <td><input type="text" name="email" /></td>
+                </tr>
+                <tr>
+                    <td><label>Last Name:</label></td>
+                    <td><input type="text" name="email" /></td>
+                </tr>
+                <tr>
+                    <td><label>Email Address:</label></td>
+                    <td><input type="text" name="email" /></td>
+                </tr>
+                <tr>
+                    <td><label>Password:</label></td>
+                    <td><input type="password" name="pwd" /></td>
+                </tr>
+            </table>
+            <!-- <input type="file" name="photo" /><br /> -->
+            <button>Sign Up</button>
+        </form>
+    </div>
 </body>
 
 </html>
