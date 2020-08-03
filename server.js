@@ -8,8 +8,14 @@ app.get('/', function(req, res) {
 app.get('/:path1', function(req, res) {
     console.log(req.searchParams)
     console.log(req.params)
-    res.write(`/:path1  <b>${req.params.path1}</b> `); //end the response
-    res.end()
+    if (req.params.path1 === 'signup') {
+        res.render("./pages/signup.html")
+    } else if (req.params.path1 === 'login') {
+        res.render("./pages/login.html")
+    } else {
+        res.write(`Oh Oh, you seem to have typed an invalid url`);
+        res.end();
+    }
 });
 
 app.get('/:path1/:path2', function(req, res) {
