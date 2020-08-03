@@ -23,12 +23,12 @@ const createAcclegorServer = () => {
                     res.render = (path) => renderPage(path, req, res);
                     reqResCallbacks[0](req, res);
                 } else {
-                    for (let i = 1; i < splitURL.length; i++) {
+                    splitURL.map((data, index) => {
                         if (splitURL !== "favicon.ico") {
                             const temp = fromattedURL[splitURL.length - 1];
-                            temp[Object.keys(temp)[i - 1]] = splitURL[i];
+                            temp[Object.keys(temp)[index - 1]] = splitURL[index];
                         }
-                    }
+                    })
                     req.params = {};
                     req.params = fromattedURL[splitURL.length - 1];
                     req.searchParams = newURL.searchParams;
@@ -50,10 +50,9 @@ const createAcclegorServer = () => {
 function callGetMethod(path, callback, fromattedURL, reqResCallbacks) {
     const pathSplit = path.split("/:");
     const paths = {};
-
-    for (let i = 1; i < pathSplit.length; i++) {
-        paths[pathSplit[i]] = "";
-    }
+    pathSplit.map((path, index) => {
+        paths[pathSplit[index + 1]] = "";
+    })
     return (
         (fromattedURL[pathSplit.length - 1] = paths),
         (reqResCallbacks[pathSplit.length - 1] = callback)
