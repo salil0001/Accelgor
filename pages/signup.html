@@ -10,33 +10,56 @@
             align-items: center;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
+
+    <script type="text/babel">
+        class Form extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    name: "",
+                    email: "",
+                    password: "",
+                };
+            }
+
+            handleChange=(e)=>{
+                this.setState({
+                    [e.target.name]:e.target.value
+                })
+            }
+
+            render() {
+                return (<form action="/user" method="post" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td><label>Name:</label></td>
+                            <td><input required type="text" name="name" value={this.state.name} onChange={this.handleChange}/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Email Address:</label></td>
+                            <td><input required type="email" name="email" value={this.state.email} onChange={this.handleChange}/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Password:</label></td>
+                            <td><input required type="password" name="password" value={this.state.password} onChange={this.handleChange}/></td>
+                        </tr>
+                    </table>
+                    <button>Sign Up</button>
+                </form>)
+            }
+        }
+        ReactDOM.render(
+            <Form />,
+            document.getElementById('login')
+        );
+    </script>
 </head>
 
 <body>
-    <div>
-        <form action="/" method="post">
-            <table>
-                <tr>
-                    <td><label>First Name:</label></td>
-                    <td><input type="text" name="email" /></td>
-                </tr>
-                <tr>
-                    <td><label>Last Name:</label></td>
-                    <td><input type="text" name="email" /></td>
-                </tr>
-                <tr>
-                    <td><label>Email Address:</label></td>
-                    <td><input type="text" name="email" /></td>
-                </tr>
-                <tr>
-                    <td><label>Password:</label></td>
-                    <td><input type="password" name="pwd" /></td>
-                </tr>
-            </table>
-            <!-- <input type="file" name="photo" /><br /> -->
-            <button>Sign Up</button>
-        </form>
-    </div>
+    <div id="login"></div>
 </body>
 
 </html>
