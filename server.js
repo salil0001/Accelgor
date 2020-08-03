@@ -6,13 +6,26 @@ app.get('/', function(req, res) {
 });
 
 app.get('/:path1', function(req, res) {
-    console.log(req.searchParams)
-    console.log(req.params)
     if (req.params.path1 === 'signup') {
         res.render("./pages/signup.html")
     } else if (req.params.path1 === 'login') {
         res.render("./pages/login.html")
-    } else {
+    } else if(req.params.path1 === "user")
+    {
+       // var queryData = "";
+        // req.on('data', function(data) {
+        //     queryData += data;
+        //     if(queryData.length > 1e6) {
+        //         queryData = "";
+        //         res.writeHead(413, {'Content-Type': 'text/plain'}).end();
+        //         req.connection.destroy();
+        //     }
+        //     console.log(queryData)
+        // });
+        
+        res.render("./pages/user.html")
+    }
+    else{
         res.write(`Oh Oh, you seem to have typed an invalid url`);
         res.end();
     }
