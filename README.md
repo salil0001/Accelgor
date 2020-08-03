@@ -1,3 +1,5 @@
+![Accelgor](https://i.imgur.com/flgoNKl.png)
+
 # Accelgor
 
 Accelgor is mini-server which is aimed to run extremely fast, limiting to only necessary features to get simple server up and running for simple tasks.
