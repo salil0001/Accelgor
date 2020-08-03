@@ -1,5 +1,5 @@
-const acclegor = require('./acclegor')
-const app= acclegor();
+const {createAcclegorServer} = require('./acclegor')
+const app= createAcclegorServer();
 
 app.get('/', function (req, res) {   
   res.render("./pages/index.html")
@@ -8,7 +8,6 @@ app.get('/', function (req, res) {
 app.get('/:path1', function (req, res) {  
   console.log(req.searchParams)
   console.log(req.params)
-
   res.write(`/:path1  <b>${req.params.path1}</b> `); //end the response
   res.end()
  });
