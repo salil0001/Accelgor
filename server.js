@@ -1,31 +1,16 @@
 const { createAcclegorServer } = require('./acclegor')
 const app = createAcclegorServer();
+const availableStaticPaths = ['signup', 'login'];
 
 app.get('/', function(req, res) {
     res.render("./pages/index.html")
 });
 
 app.get('/:path1', function(req, res) {
-    if (req.params.path1 === 'signup') {
-        res.render("./pages/signup.html")
-    } else if (req.params.path1 === 'login') {
-        res.render("./pages/login.html")
-    } else if(req.params.path1 === "user")
-    {
-       // var queryData = "";
-        // req.on('data', function(data) {
-        //     queryData += data;
-        //     if(queryData.length > 1e6) {
-        //         queryData = "";
-        //         res.writeHead(413, {'Content-Type': 'text/plain'}).end();
-        //         req.connection.destroy();
-        //     }
-        //     console.log(queryData)
-        // });
-        
-        res.render("./pages/user.html")
-    }
-    else{
+    const path = req.params.path1;
+    if (availableStaticPaths.includes(path)) {
+        res.render(`./pages/${path}.html`)
+    } else {
         res.write(`Oh Oh, you seem to have typed an invalid url`);
         res.end();
     }
